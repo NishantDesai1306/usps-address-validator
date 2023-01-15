@@ -1,4 +1,5 @@
 import validator from "../../middleware/validator";
+import connectDB from "../../middleware/mongo";
 import Address from "../../models/address";
 import validationSchema from "../../utils/validator-schema/address";
 
@@ -21,7 +22,7 @@ async function handler(req, res) {
         zip,
       });
       
-      var createdDocument = await address.save();
+      const createdDocument = await address.save();
       return res.status(200).send(createdDocument);
     }
     catch (e) {
@@ -36,4 +37,4 @@ async function handler(req, res) {
   }
 }
 
-export default validator("body", validationSchema, handler);
+export default validator("body", validationSchema, connectDB(handler));
