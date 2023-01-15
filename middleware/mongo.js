@@ -1,15 +1,19 @@
 import mongoose from "mongoose";
 
 const connectDB = (handler) => async (req, res) => {
-  if (mongoose.connections[0].readyState) {
+  if (mongoose.connections[0].readyState === mongoose.ConnectionStates.connected) {
     return handler(req, res);
   }
 
-  await mongoose.connect(process.env.MONGO_URI, (err) => {
-    if (err) console.log(err);
-    else console.log("mongdb is connected");
+  mongoose.connect(process.env.MONGO_URI, (err) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    
+    console.log("mongdb is connected");
+    return handler(req, res);
   });
-  return handler(req, res);
 };
 
 export default connectDB;
