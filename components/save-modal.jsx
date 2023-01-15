@@ -19,13 +19,13 @@ export default function SaveAddressModal ({ originalAddress, verifiedAddress, on
 
     if (selectedAddressVersion === ADDRESS_VERSION.ORIGINAL) {
       objToSave.addressLine1 = originalAddress.addressLine1;
-      // objToSave.addressLine2 = originalAddress.addressLine2;
+      objToSave.addressLine2 = originalAddress.addressLine2;
       objToSave.state = originalAddress.state;
       objToSave.city = originalAddress.city;
       objToSave.zip = originalAddress.zip;
     }
     else if (selectedAddressVersion === ADDRESS_VERSION.STANDARDIZED) {
-      // objToSave.addressLine1 = verifiedAddress.street1;
+      objToSave.addressLine1 = verifiedAddress.street1;
       objToSave.addressLine2 = verifiedAddress.street2;
       objToSave.state = verifiedAddress.state;
       objToSave.city = verifiedAddress.city;
